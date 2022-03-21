@@ -6,7 +6,7 @@ SendMode Input
 #SingleInstance force
 
 
-options := {delay: 150, timeout: 300, doublePress: -1, swap_backtick_escape: false, mode: "ijkl"}
+options := {delay: 150, timeout: 300, doublePress: -1, swap_backtick_escape: false, mode: "hjkl"}
 loop %0% {
 	arg := %A_Index%
 	argSplit := StrSplit(arg, "=")
@@ -89,13 +89,18 @@ dual := new Dual
 #If
 
 
+
 #If true ; Override defaults.ahk. There will be "duplicate hotkey" errors otherwise.
+\::`
+LWin::LCtrl
+LCtrl::LWin	
+
 *Space::
 *Space UP::dual.combine("F22", A_ThisHotkey, {delay: options.delay, timeout: options.timeout, doublePress: options.doublePress})
 
 *BackSpace::dual.comboKey({F22: "Delete"})
 
-*\::dual.comboKey({F22: "Insert"})
+; *\::dual.comboKey({F22: "Insert"})
 
 *b::dual.comboKey({F22: "Space"})
 
